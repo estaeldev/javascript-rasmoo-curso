@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+    border: none;
+    outline: none;
+}
+
+:root {
+    --cor-white: white;
+    --cor-regular-purple: #771AC9;
+    --cor-regular-light-purple: #821DDB;
+    --cor-light-purple: #8D1CF5;
+    --cor-grey: #F0F1F5;
+    --cor-black: #202020;
+    --cor-tag-grey: #342745;
+    --cor-tag-regular-purple: #512090;
+    --cor-tag-ligth-purple: #512090;
+    --cor-tag-white-purple: #B8A0D5;
+
+}
+
+body {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    row-gap: 95px;
+}
+
+/* header */
+
+header {
+    width: 100%;
+    height: 110px;
+    background-color: var(--cor-regular-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .header_container {
+    width: 1300px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+}
+
+
+header .header_container .header_info {
+    width: 300px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 30px;
+}
+
+
+header .header_container .header_info button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--cor-regular-purple);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .header_container .header_info button:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 1px var(--cor-white)
+}
+
+
+
+header .header_container .header_info span {
+    flex: 1;
+    color: var(--cor-white);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* main */
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+
+.main_container {
+    width: 500px;
+    height: 246px;
+    padding: 40px;
+    border-radius: 6px;
+    background-color: var(--cor-white);
+    border: 2px solid var(--cor-grey);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* primeira linha */
+
+.main_container .primeira_linha {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main_container .primeira_linha .saldo_atual {
+    background-color: var(--cor-regular-purple);
+    padding: 5px 15px;
+    border-radius: 50px;
+}
+
+.main_container .primeira_linha .saldo_atual h2 {
+    color: var(--cor-white);
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.main_container .primeira_linha span {
+    color: var(--cor-regular-purple);
+    font-weight: 400;
+    font-size: 22px;
+}
+
+
+/* segunda linha */
+
+.main_container .segunda_linha {
+    width: 100%;
+    height: 76px;
+    padding: 0px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main_container .segunda_linha .linha_separador {
+    width: 100%;
+    height: 1px;
+    background-color: var(--cor-regular-purple);
+}
+
+.main_container .segunda_linha input {
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--cor-regular-purple);
+}
+
+.main_container .segunda_linha .button_container {
+    width: 100%;
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+}
+
+.main_container .segunda_linha .button_container .button_cancelar {
+    width: 100%;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: var(--cor-grey);
+    transition: 0.4s;
+}
+
+.main_container .segunda_linha .button_container .button_cancelar:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 1px rgb(255, 72, 72);
+}
+
+.main_container .segunda_linha .button_container .button_confirmar {
+    width: 100%;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--cor-white);
+    background-color: var(--cor-regular-purple);
+    cursor: pointer;
+}
+
+.main_container .segunda_linha .button_container .button_confirmar:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 1px blueviolet;
+}
+
+
+
