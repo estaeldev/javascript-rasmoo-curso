@@ -8,6 +8,7 @@ let saldoAtual = 0;
 
 confirmarButtonElement.addEventListener("click", () => {
     // smallElement.style.display = "none";
+    deleteMessage();
     if(isNumberValid(valorInputElement.value)){
         saldoAtual += Number(valorInputElement.value);
         displaySaldo.innerText = saldoAtual;
@@ -24,8 +25,19 @@ cancelarButtonElement.addEventListener("click", () =>  {
     limparInputValor();
 });
 
-function limparInputValor(){
+valorInputElement.addEventListener("keydown", (event) => {
+    return true;
+});
+
+function limparInputValor() {
     valorInputElement.value = "";
+}
+
+function deleteMessage(){
+    const small = document.querySelector("small");
+    if(small) {
+        small.remove();
+    }
 }
 
 function isNumberValid(number) {
@@ -33,11 +45,6 @@ function isNumberValid(number) {
 }
 
 function showMessage(message, type) {
-    const small = document.querySelector("small");
-    if(small) {
-        small.remove();
-    }
-    
     const createSmallElement = document.createElement("small");
     createSmallElement.innerText = message;
     createSmallElement.style.color = "red";
