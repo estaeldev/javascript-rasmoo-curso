@@ -16,7 +16,7 @@ confirmarButtonElement.addEventListener("click", () => {
         // smallElement.style.display = "block"
         showMessage("Valor informado é inválido!");
     }
-
+    
     limparInputValor();
     
 });
@@ -26,7 +26,9 @@ cancelarButtonElement.addEventListener("click", () =>  {
 });
 
 valorInputElement.addEventListener("keydown", (event) => {
-    return true;
+    if(event.keyCode > 31 && (event.keyCode > 105 || event.keyCode < 97)){
+        event.preventDefault();
+    }
 });
 
 function limparInputValor() {
