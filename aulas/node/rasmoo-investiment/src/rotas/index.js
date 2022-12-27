@@ -23,12 +23,24 @@ const investiments = [
     new Investment(5, "Tesouro Selic 2025", 11868, 0.1, 1080)
 ];
 
+function nextId() {
+    const maiorId = investiments.reduce((acc, investiment) => {
+        if(investiment.id > acc) {
+            acc = investiment.id;
+        }
+        return acc;
+    }, 0);
+    return maiorId+1;
+}
+
+function isInvestmentValid({name, minValue, tax, time}) {
+    return name && minValue && tax && time;
+}
+
 module.exports = async (fastify) => {
 
     fastify.get("/health", (request, reply) => {
-        reply.send({
-            message: "Server is up and running."
-        });
+        reply.send({message: "Server is up and running."});
     });
 
     fastify.get("/investments", function (request, reply) {
@@ -36,45 +48,60 @@ module.exports = async (fastify) => {
     });
 
     fastify.get("/investments/:id",  (request, reply) => {
-        const id = request.params.id;
-        const investiment = investiments.find((investiment) => {
-            return investiment.id == id;
-        });
+        const {id} = request.params;
+        const investiment = investiments.find((investiment) => investiment.id == id);
+
         if(investiment != null){
             reply.send(investiment);
         }
-        reply.status(404).send({
-            message: "Investment Not Found"
-        });
+
+        reply.status(404).send({message: "Investment Not Found"});
     });
     
     fastify.delete("/investments/:id", (request, reply) => {
-        const id = request.params.id;
-        const index = investiments.findIndex((investiment) => {
-            return investiment.id == id;
-        });
+        const {id} = request.params;
+        const index = investiments.findIndex((investiment) => investiment.id == id);
 
         if(index >= 0){
             investiments.splice(index, 1);
-            reply.send();
+            reply.status(204).send();
         }
 
-        reply.status(404).send({
-            message: "Investment Not Found"
-        });
+        reply.status(404).send({message: "Investment Not Found"});
     });
 
     fastify.post("/investments", (request, reply) => {
-        const id = request.body.id;
-        const name = request.body.name;
-        const minValue = request.body.minValue;
-        const tax = request.body.tax;
-        const time = request.body.time;
+        const {name, minValue, tax, time} = request.body;
+        
+        if(isInvestmentValid(request.body)){
+            const investiment = new Investment(nextId(), name, minValue, tax, time);
+            investiments.push(investiment);
+            reply.status(201).send(investiment);
+        }
+        
+        reply.status(400).send({message: "Preencha todos os campos."})
 
-        const investiment = new Investment(id, name, minValue, tax, time);
-        investiments.push(investiment);
+    });
+    
+    fastify.put("/investments/:id", (request, reply) => {
+        const {id} = request.params;
+        const investiment = investiments.find((investiment) => investiment.id == id);
 
-        reply.send(investiment);
+        if(investiment != null) {
+            if(isInvestmentValid(request.body)){
+                const {name, minValue, tax, time} = request.body;
+                investiment.name = name;
+                investiment.minValue = minValue;
+                investiment.tax = tax;
+                investiment.time = time;
+                reply.send(investiment);
+            } else {
+                reply.status(400).send({message: "Preencha todos os campos."});
+            }
+        }
+
+        reply.status(404).send({message: "Investment Not Found"});
+        
     });
     
 }
