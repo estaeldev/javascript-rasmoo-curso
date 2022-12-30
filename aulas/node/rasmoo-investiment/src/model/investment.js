@@ -7,7 +7,7 @@ class Investment {
         this.tax = tax;
         this.time = time;
     }
-
+    
     isValid() {
         return this.name && this.minValue && this.tax && this.time;
     }
